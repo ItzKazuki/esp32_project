@@ -26,3 +26,33 @@ int getSensorPercent(int sensorValue) {
   int soilMoisturePercent = map(sensorValue, KERING_LOW, KERING_HIGH, 0, 100);
   return constrain(soilMoisturePercent, 0, 100);
 }
+
+void switchLED(const char* state) {
+  if (state == "GREEN") {
+    // set conditional led
+    digitalWrite(LED_YELLOW, LOW);
+    digitalWrite(LED_RED, LOW);
+
+    // set led
+    digitalWrite(LED_GREEN, HIGH);
+  } else if (state == "YELLOW") {
+    // set conditional led
+    digitalWrite(LED_GREEN, LOW);
+    digitalWrite(LED_RED, LOW);
+
+    // set led
+    digitalWrite(LED_YELLOW, HIGH);
+  } else if (state == "RED") {
+    // set conditional led
+    digitalWrite(LED_GREEN, LOW);
+    digitalWrite(LED_YELLOW, LOW);
+
+    // set led
+    digitalWrite(LED_RED, HIGH);
+  } else {
+    // default case
+    digitalWrite(LED_GREEN, LOW);
+    digitalWrite(LED_YELLOW, LOW);
+    digitalWrite(LED_RED, LOW);
+  }
+}
