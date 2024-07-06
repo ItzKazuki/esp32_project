@@ -23,7 +23,7 @@ const int TERLALU_LEMBAP_HIGH = 1638;
 const int TERLALU_LEMBAP_LOW = 820;
 
 int getSensorPercent(int sensorValue) {
-  int soilMoisturePercent = map(sensorValue, KERING_LOW, KERING_HIGH, 0, 100);
+  int soilMoisturePercent = map(sensorValue, 4096, 0, 0, 100);
   return constrain(soilMoisturePercent, 0, 100);
 }
 

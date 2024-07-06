@@ -80,14 +80,14 @@ void loop() {
 
   if(WiFi.status() == WL_CONNECTED) {
     char httpRequestData[100];
-    sprintf(httpRequestData, "indikator_kelembapan=%d&key=%s&kelembapan=%d", sensorValue, BACKEND_KEY, soilMoisturePercent);
+    sprintf(httpRequestData, "indikator_kelembapan=%d&key=%s&kelembapan=%d&SSID=%s&SSID_Stregth=%s", sensorValue, BACKEND_KEY, soilMoisturePercent, WiFi.SSID(), WiFi.RSSI());
 
     sendPostData(httpRequestData);
     Serial.print("Soil Moisture Value: ");
     Serial.println(sensorValue);
 
     // do led switch in here ;)
-    if(soilMoisturePercent >= 70 && soilMoisturePercent <= 100) {
+    if(soilMoisturePercent >= 0 && soilMoisturePercent <= 39) {
       switchLED("RED");
     } else if(soilMoisturePercent >= 40 && soilMoisturePercent <= 69) {
       switchLED("GREEN");
@@ -97,7 +97,7 @@ void loop() {
 
     Serial.println("\n========= ESP32 Connection ==========\n");
   } else {
-    Serial.println("Wifi Disconnected.. no connection");
+    Serial.println("Wifi Disconnected.. no connection to reach backend!");
   }
 
   delay(3000);
